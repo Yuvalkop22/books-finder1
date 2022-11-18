@@ -1,10 +1,11 @@
-import {React, useState, useRef} from 'react';
+import { React, useState, useRef } from 'react';
 import { ReactDialogBox } from 'react-js-dialog-box';
 import 'react-js-dialog-box/dist/index.css';
 const Search = (props) => {
-    const [searchValue,setSearchValue] = useState("");
-    const[isOpen,setIsOpen] = useState(false);
-    const [content,setContent] = useState("");
+    const [searchValue, setSearchValue] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
+    const [content, setContent] = useState("");
+    const [title, setTitle] = useState("");
     const searchRef = useRef();
     async function fetching() {
         const url = "https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAHsKpoDCFfLdMVct7VhEqDCoUrqqXuYaM";
@@ -27,11 +28,13 @@ const Search = (props) => {
 
     const closeBox = () => {
         setIsOpen(false);
-    }
+    };
 
-    const openBox = (content) => {
-        setIsOpen(true)
-    }
+    const openBox = (content,title) => {
+        setContent(content);
+        setTitle(title)
+        setIsOpen(true);
+    };
     return (
         <div>
             <h1>Hello , {props.value}</h1>
@@ -40,10 +43,10 @@ const Search = (props) => {
             <button onClick={fetching1}>Click Me to Display all</button>
 
             {
-                props.result.filter(item => (item.volumeInfo.title.includes(searchValue))).slice(0,20).map(item => (<h4 onClick={openBox}>{item.volumeInfo.title}</h4>))
+                props.result.filter(item => (item.volumeInfo.title.includes(searchValue))).slice(0, 20).map(item => (<h4 onClick={() => openBox("by  = " + item.volumeInfo.authors[0] + " , more information = " + item.volumeInfo.subtitle, item.volumeInfo.title)}>{item.volumeInfo.title}</h4>))
             }
             {
-                props.result1.slice(0, 20).map(item => (<h4 onClick={openBox}>{item.volumeInfo.title}</h4>))
+                props.result1.slice(0, 20).map(item => (<h4 onClick={() => openBox("by  = " + item.volumeInfo.authors[0] + " , more information = " + item.volumeInfo.subtitle, item.volumeInfo.title)}>{item.volumeInfo.title}</h4>))
             }
             {isOpen && (
                 <>
@@ -53,24 +56,20 @@ const Search = (props) => {
                         headerBackgroundColor='red'
                         headerTextColor='white'
                         headerHeight='65'
+                        headerText = {title}
                         closeButtonColor='white'
                         bodyBackgroundColor='white'
                         bodyTextColor='black'
                         bodyHeight='200px'
                     >
                         <div>
-                            <h1>Click Button To Display description</h1>
+                            <h7>{content}</h7>
                         </div>
-                        <div>
-                            <h1>{content}</h1>
-                        </div>
-                        <button>display description</button>
-                        <button>Add to wishlist!</button>
                     </ReactDialogBox>
                 </>
             )}
         </div>
-     )
+    );
 };
 
 export default Search;
