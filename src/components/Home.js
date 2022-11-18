@@ -4,6 +4,7 @@ const Home = (props) => {
     const navigate = useNavigate();
     const todoRef = useRef();
     const nav = () =>{
+        if (todoRef.current.value === '') return
         props.setValue(todoRef.current.value);
         navigate("/search");
     }

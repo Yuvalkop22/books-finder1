@@ -17,6 +17,7 @@ function App() {
 
   const [value, setValue] = useState("");
 
+  
   return (
     <Router>
       <div>
@@ -34,7 +35,7 @@ function App() {
           </ul>
         </nav>
         <Routes>
-          <Route path="/search" element={<Search setValue={setValue} value={value}/>}>
+          <Route path="/search" element={<Search setValue={setValue} value={value} />}>
           </Route>
           <Route path="/wishlist" element={<WishList/>}>
           </Route>
