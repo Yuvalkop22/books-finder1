@@ -14,10 +14,10 @@ import WishList from './components/WishList';
 
 
 function App() {
-
   const [value, setValue] = useState("");
+  const [result,setResult] = useState([]);
+  const [result1, setResult1] = useState([]);
 
-  
   return (
     <Router>
       <div>
@@ -35,7 +35,7 @@ function App() {
           </ul>
         </nav>
         <Routes>
-          <Route path="/search" element={<Search setValue={setValue} value={value} />}>
+          <Route path="/search" element={<Search setValue={setValue} value={value} setResult={setResult} result={result} setResult1={setResult1} result1={result1} />}>
           </Route>
           <Route path="/wishlist" element={<WishList/>}>
           </Route>
@@ -46,5 +46,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
