@@ -35,12 +35,17 @@ const Search = (props) => {
         setTitle(title)
         setIsOpen(true);
     };
+    const clear = () => {
+        props.setResult([]);
+        props.setResult1([]);
+    }
     return (
         <div>
             <h1>Hello , {props.value}</h1>
             <input type={'text'} ref={searchRef} placeholder={"Enter Book Name"} />
             <button onClick={fetching}>Click Me to Specific Search</button>
             <button onClick={fetching1}>Click Me to Display all</button>
+            <button onClick={clear}>Click Me To Clear</button>
 
             {
                 props.result.filter(item => (item.volumeInfo.title.includes(searchValue))).slice(0, 20).map(item => (<h4 onClick={() => openBox("by  = " + item.volumeInfo.authors[0] + " , more information = " + item.volumeInfo.subtitle, item.volumeInfo.title)}>{item.volumeInfo.title}</h4>))
