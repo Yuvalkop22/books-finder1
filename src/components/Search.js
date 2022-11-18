@@ -39,7 +39,7 @@ const Search = (props) => {
         <div>
             <h1>Hello , {props.value}</h1>
             <input type={'text'} ref={searchRef} placeholder={"Enter Book Name"} />
-            <button onClick={fetching}>Click Me to Search</button>
+            <button onClick={fetching}>Click Me to Specific Search</button>
             <button onClick={fetching1}>Click Me to Display all</button>
 
             {
